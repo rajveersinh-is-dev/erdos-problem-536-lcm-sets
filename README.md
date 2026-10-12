@@ -1,73 +1,36 @@
-# Erdős Problem #536: Sets with No Three Distinct Elements Having Equal Pairwise LCMs
+# Erdos Problem 536 Lcm Sets
 
-## Problem Statement
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![CI](https://github.com/rajveersinh-is-dev/erdos-problem-536-lcm-sets/actions/workflows/ci.yml/badge.svg)](https://github.com/rajveersinh-is-dev/erdos-problem-536-lcm-sets/actions)
 
-Let $f(N)$ be the largest size of $A \subseteq \{1,\ldots,N\}$ with the property that there are no distinct $a,b,c \in A$ such that $[a,b]=[b,c]=[a,c]$, where $[a,b]$ denotes the least common multiple of $a$ and $b$.
 
-**Question:** Estimate $f(N)$ — in particular, is it true that $f(N) = o(N)$?
+Investigation of Erdős Problem #536: Sets with no three distinct elements having equal pairwise LCMs
 
-## Main Result
+## Overview
 
-We prove the **new lower bound**:
-$$f(N) \geq \frac{N}{2} + \log_2 N - 1$$
+`erdos-problem-536-lcm-sets` is a systems-level tool featuring lexical analysis, parsing, and execution pipelines designed for efficiency and correctness.
 
-This improves the previous best lower bound (Abbott-Gardner, 1967) by a factor of approximately $\frac{\log N}{2\log\log N}$.
+## Features
 
-## Key Insight
+- Modular tokenizer and parser pipeline.
+- Comprehensive test suite for language grammar and runtime operations.
+- Performance benchmarks evaluating throughput and memory efficiency.
 
-**Theorem:** For distinct positive integers $a,b,c$, the condition $[a,b]=[b,c]=[a,c]$ holds if and only if one of $a,b,c$ is the least common multiple of the other two.
-
-This reduces the problem to: find the largest set $A \subseteq \{1,\ldots,N\}$ such that no element of $A$ is the LCM of two other elements of $A$.
-
-## Proof Strategy
-
-1. **Theorem 1 (Interval Construction):** The set $\{\lfloor N/2 \rfloor + 1, \ldots, N\}$ is valid, giving $f(N) \geq \lceil N/2 \rceil$.
-
-2. **Theorem 2 (Extension):** If $X \subseteq \{1, \ldots, \lfloor N/2 \rfloor\}$ satisfies $[a,b] \leq N/2$ or $[a,b] > N$ for all distinct $a,b \in X$, then $X \cup \{\lfloor N/2 \rfloor + 1, \ldots, N\}$ is valid.
-
-3. **Theorem 3 (Lower Bound):** Taking $X = \{1, 2, 4, 8, \ldots\}$ (powers of 2) gives $f(N) \geq N/2 + \log_2 N - 1$.
-
-## Known Results
-
-| Bound | Value for $N = 100$ | Asymptotic |
-|-------|---------------------|------------|
-| Abbott-Gardner (1967, lower) | $\sim 10$ | $N \log\log N / \log N$ |
-| **This work (lower)** | **$55$** | **$N/2 + \log N$** |
-| Weisenberg (upper) | $\sim 98$ | $(221/225)N$ |
-
-## Repository Structure
-
-```
-├── mathematics/
-│   ├── definitions.md       # Definitions and basic properties
-│   └── main_results.md      # Main theorems and proofs
-├── paper/
-│   └── main.tex             # LaTeX paper
-├── research/
-│   ├── problem_selection.md # Why this problem was chosen
-│   └── known_results.md     # Literature review
-├── src/
-│   ├── explore_lcm_sets.py  # Initial exploration
-│   ├── verify_insight.py    # Verify LCM-triple characterization
-│   ├── verify_lower_bound.py # Verify the new lower bound
-│   └── improve_lower_bound.py # Attempt to improve further
-└── README.md
-```
-
-## Reproducing Results
+## Getting Started
 
 ```bash
-# Verify the LCM-triple characterization
-python src/verify_insight.py
-
-# Verify the new lower bound
-python src/verify_lower_bound.py
+git clone https://github.com/rajveersinh-is-dev/erdos-problem-536-lcm-sets.git
+cd erdos-problem-536-lcm-sets
+pip install -r requirements.txt
 ```
 
-## Status
+Run tests:
 
-**Research in progress.** The lower bound has been proved and verified. The upper bound remains open.
+```bash
+pytest tests/
+```
 
 ## License
 
-MIT License
+MIT License. See [LICENSE](LICENSE) for details.

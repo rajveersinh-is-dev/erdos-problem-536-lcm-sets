@@ -5,10 +5,11 @@ having equal pairwise LCMs.
 We want to find the maximum size of A ⊆ {1,...,N} such that
 there are no distinct a,b,c ∈ A with [a,b] = [b,c] = [a,c].
 """
+from __future__ import annotations
+
 
 from math import gcd
 from itertools import combinations
-from functools import lru_cache
 
 
 def lcm(a, b):
@@ -16,7 +17,7 @@ def lcm(a, b):
     return a * b // gcd(a, b)
 
 
-def has_bad_triple(A):
+def has_bad_triple(A) -> tuple:
     """Check if set A contains distinct a,b,c with [a,b]=[b,c]=[a,c]."""
     A_list = sorted(A)
     n = len(A_list)
@@ -38,7 +39,7 @@ def is_valid_set(A):
     return not bad
 
 
-def find_max_set_bruteforce(N):
+def find_max_set_bruteforce(N) -> list:
     """Find maximum valid subset of {1,...,N} by brute force."""
     from itertools import combinations
 

@@ -7,15 +7,28 @@ So X is good, and X ∪ (N/2, N] is valid.
 
 The number of such numbers is approximately (log_2(N/2) * log_3(N/2)) / 2.
 """
+from __future__ import annotations
 
 from math import gcd, log
 
 
+
+
 def lcm(a, b):
+    """Lcm.
+    
+    Args:
+        a:
+        b:
+    
+    Returns:
+        The computed result
+    
+    """
     return a * b // gcd(a, b)
 
 
-def is_valid_set(A):
+def is_valid_set(A) -> bool:
     """Check if A has no element that is the LCM of two others."""
     A_set = set(A)
     A_list = sorted(A)
@@ -67,7 +80,7 @@ def construct_set_2_3_5(N):
     return sorted(X)
 
 
-def verify_construction(N, X):
+def verify_construction(N, X) -> tuple:
     """Verify that X ∪ (N/2, N] is valid."""
     A = set(X)
     for x in range(N // 2 + 1, N + 1):
