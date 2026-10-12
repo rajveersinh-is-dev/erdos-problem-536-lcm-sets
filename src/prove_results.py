@@ -5,15 +5,27 @@ Key insight: A is valid iff no element of A is the LCM of two other elements of 
 
 This is equivalent to: for any distinct a,b,c in A, c ≠ lcm(a,b).
 """
+from __future__ import annotations
+
 
 from math import gcd
 
 
 def lcm(a, b):
+    """Lcm.
+    
+    Args:
+        a:
+        b:
+    
+    Returns:
+        The computed result
+    
+    """
     return a * b // gcd(a, b)
 
 
-def is_valid_set(A):
+def is_valid_set(A) -> bool:
     """Check if A has no element that is the LCM of two others."""
     A_list = sorted(A)
     n = len(A_list)
@@ -25,7 +37,7 @@ def is_valid_set(A):
     return True
 
 
-def theorem_1_prime_powers(N):
+def theorem_1_prime_powers(N) -> tuple:
     """Theorem: The set of all prime powers ≤ N is valid."""
     # Find all prime powers ≤ N
     prime_powers = set()
@@ -48,7 +60,7 @@ def theorem_1_prime_powers(N):
     return len(prime_powers), sorted(prime_powers)
 
 
-def theorem_2_antichain(N):
+def theorem_2_antichain(N) -> tuple:
     """Theorem: Any antichain in divisibility order is valid."""
     # Find a large antichain: numbers in (N/2, N]
     antichain = list(range(N//2 + 1, N+1))
@@ -64,7 +76,7 @@ def theorem_2_antichain(N):
     return len(antichain), antichain
 
 
-def theorem_3_squarefree_same_primes(N):
+def theorem_3_squarefree_same_primes(N) -> bool | tuple:
     """
     Theorem: If A consists of squarefree numbers all having the same
     set of prime factors, then A is valid.
@@ -78,10 +90,18 @@ def theorem_3_squarefree_same_primes(N):
     # then lcm(a,b) = a*b/gcd(a,b). For this to equal c, we need specific conditions.
 
     # Let's just verify computationally
-    import itertools
 
     # Get all squarefree numbers ≤ N
-    def is_squarefree(n):
+    def is_squarefree(n) -> bool:
+        """Is squarefree.
+        
+        Args:
+            n:
+        
+        Returns:
+            bool: Result of type bool
+        
+        """
         d = 2
         while d * d <= n:
             if n % (d*d) == 0:
@@ -151,7 +171,7 @@ def theorem_4_upper_bound(N):
     return len(bad_triples)
 
 
-def theorem_5_density_lower_bound(N):
+def theorem_5_density_lower_bound(N) -> tuple:
     """
     Theorem: f(N) ≥ N/2 for all N.
 
@@ -182,7 +202,7 @@ def theorem_5_density_lower_bound(N):
     return len(A), valid
 
 
-def theorem_6_improved_construction(N):
+def theorem_6_improved_construction(N) -> tuple:
     """
     Improved construction: take numbers in (N/2, N] that are not LCMs
     of other numbers in the set.
@@ -197,9 +217,9 @@ def theorem_6_improved_construction(N):
     for x in candidates:
         # Check if x is the LCM of any two numbers already in result
         is_lcm = False
-        for i in range(len(result)):
+        for i, item in enumerate(result):
             for j in range(i+1, len(result)):
-                if lcm(result[i], result[j]) == x:
+                if lcm(item, result[j]) == x:
                     is_lcm = True
                     break
             if is_lcm:
@@ -211,7 +231,7 @@ def theorem_6_improved_construction(N):
     return len(result), result
 
 
-def theorem_7_prime_power_construction(N):
+def theorem_7_prime_power_construction(N) -> tuple:
     """
     Construction using prime powers and large numbers.
 
@@ -238,9 +258,9 @@ def theorem_7_prime_power_construction(N):
         # Check if x is the LCM of any two numbers in result
         is_lcm = False
         result_list = list(result)
-        for i in range(len(result_list)):
+        for i, item in enumerate(result_list):
             for j in range(i+1, len(result_list)):
-                if lcm(result_list[i], result_list[j]) == x:
+                if lcm(item, result_list[j]) == x:
                     is_lcm = True
                     break
             if is_lcm:
