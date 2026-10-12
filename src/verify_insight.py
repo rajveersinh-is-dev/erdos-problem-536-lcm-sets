@@ -4,10 +4,21 @@ Verify the key insight: [a,b]=[b,c]=[a,c] iff one element is the LCM of the othe
 This would mean: (a,b,c) is a bad triple iff c = lcm(a,b) or a = lcm(b,c) or b = lcm(a,c).
 """
 
+from collections import defaultdict
 from math import gcd
 
 
 def lcm(a, b):
+    """Lcm.
+    
+    Args:
+        a:
+        b:
+    
+    Returns:
+        The computed result
+    
+    """
     return a * b // gcd(a, b)
 
 
@@ -51,12 +62,13 @@ def verify_insight(N):
 
     if mismatches:
         print("Mismatches found:")
-        for m in mismatches[:20]:
+        for m in mismatches[:
+            20]:
             print(f"  {m}")
     else:
         print("[OK] Insight verified: bad triples = LCM triples")
 
-    return len(mismatches) == 0
+    return not mismatches
 
 
 def analyze_lcm_characterization(N):
@@ -64,13 +76,11 @@ def analyze_lcm_characterization(N):
     print(f"\n=== LCM Characterization for N={N} ===")
 
     # For each number, find which pairs have it as their LCM
-    lcm_pairs = {}
+    lcm_pairs = defaultdict(list)
     for a in range(1, N+1):
         for b in range(a+1, N+1):
             l = lcm(a, b)
             if l <= N:
-                if l not in lcm_pairs:
-                    lcm_pairs[l] = []
                 lcm_pairs[l].append((a, b))
 
     print(f"Numbers that are LCMs of pairs: {len(lcm_pairs)}")
@@ -80,7 +90,8 @@ def analyze_lcm_characterization(N):
     counts.sort(key=lambda x: -x[1])
 
     print("\nTop 20 numbers with most pairs having them as LCM:")
-    for l, count in counts[:20]:
+    for l, count in counts[:
+        20]:
         print(f"  {l}: {count} pairs")
 
     return lcm_pairs
@@ -98,9 +109,9 @@ def find_max_set_avoiding_lcm(N):
     for x in range(1, N+1):
         # Check if x is the LCM of any two elements in result
         is_lcm_of_pair = False
-        for i in range(len(result)):
+        for i, item in enumerate(result):
             for j in range(i+1, len(result)):
-                if lcm(result[i], result[j]) == x:
+                if lcm(item, result[j]) == x:
                     is_lcm_of_pair = True
                     break
             if is_lcm_of_pair:
@@ -108,8 +119,8 @@ def find_max_set_avoiding_lcm(N):
 
         # Check if any element in result is the LCM of x and another element
         creates_lcm = False
-        for i in range(len(result)):
-            if lcm(result[i], x) in result:
+        for i, item in enumerate(result):
+            if lcm(item, x) in result:
                 creates_lcm = True
                 break
 
