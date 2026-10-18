@@ -8,12 +8,21 @@ This is equivalent to: the "maximum" prime factorization is achieved
 by at least two of the three elements.
 """
 
+from collections import defaultdict
 from math import gcd
-from itertools import combinations
-from collections import Counter, defaultdict
 
 
 def lcm(a, b):
+    """Lcm.
+    
+    Args:
+        a:
+        b:
+    
+    Returns:
+        The computed result
+    
+    """
     return a * b // gcd(a, b)
 
 
@@ -89,9 +98,9 @@ def find_valid_set_via_independent_set(N):
     for x in range(1, N+1):
         # Check if adding x creates any bad triple
         creates_bad = False
-        for i in range(len(result)):
+        for i, item in enumerate(result):
             for j in range(i+1, len(result)):
-                if is_bad_triple(result[i], result[j], x):
+                if is_bad_triple(item, result[j], x):
                     creates_bad = True
                     break
             if creates_bad:
@@ -148,10 +157,10 @@ def analyze_squarefree_sets(N):
     for x in squarefree:
         test = result + [x]
         valid = True
-        for i in range(len(test)):
+        for i, item in enumerate(test):
             for j in range(i+1, len(test)):
                 for k in range(j+1, len(test)):
-                    if is_bad_triple(test[i], test[j], test[k]):
+                    if is_bad_triple(item, test[j], test[k]):
                         valid = False
                         break
                 if not valid:
@@ -187,10 +196,10 @@ def analyze_multiples_of_primes(N):
         for x in candidates:
             test = result + [x]
             valid = True
-            for i in range(len(test)):
+            for i, item in enumerate(test):
                 for j in range(i+1, len(test)):
                     for l in range(j+1, len(test)):
-                        if is_bad_triple(test[i], test[j], test[l]):
+                        if is_bad_triple(item, test[j], test[l]):
                             valid = False
                             break
                     if not valid:
@@ -209,7 +218,8 @@ if __name__ == "__main__":
     print("=== Bad Triples Analysis ===")
     bad = analyze_bad_triples(30)
     print(f"Bad triples in [1,30]: {len(bad)}")
-    for t in bad[:20]:
+    for t in bad[:
+        20]:
         print(f"  {t}")
 
     print("\n=== Prime Power Analysis ===")

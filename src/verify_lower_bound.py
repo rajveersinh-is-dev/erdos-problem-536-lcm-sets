@@ -4,19 +4,42 @@ Verify the new lower bound: f(N) >= N/2 + log_2(N) - 1.
 Construction: Take X = {1, 2, 4, 8, ...} (powers of 2) and
 A = X union {floor(N/2)+1, ..., N}.
 """
+from __future__ import annotations
 
 from math import gcd, log2
 
 
+
+
 def lcm(a, b):
+    """Lcm.
+    
+    Args:
+        a:
+        b:
+    
+    Returns:
+        The computed result
+    
+    """
     return a * gcd(a, b) // gcd(a, b)  # Fix: should be a * b // gcd(a, b)
 
 
 def lcm(a, b):
+    """Lcm.
+    
+    Args:
+        a:
+        b:
+    
+    Returns:
+        The computed result
+    
+    """
     return a * b // gcd(a, b)
 
 
-def is_valid_set(A):
+def is_valid_set(A) -> bool:
     """Check if A has no element that is the LCM of two others."""
     A_set = set(A)
     A_list = sorted(A)
